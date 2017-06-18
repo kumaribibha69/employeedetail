@@ -3,11 +3,11 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.home.employee</groupId>
-	<artifactId>empdetail</artifactId>
+	<artifactId>employeedetail</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
 
-	<name>empdetail</name>
+	<name>employeedetail</name>
 	<url>http://maven.apache.org</url>
 
 	<properties>
