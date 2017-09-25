@@ -1,5 +1,7 @@
 package com.home.employee.controller;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,6 +15,8 @@ import com.home.employee.service.EmployeeService;
 
 @Controller
 public class EmployeeController {
+	
+	Logger logger = LoggerFactory.getLogger(EmployeeController.class);
 
 	@Autowired
 	private EmployeeService employeeService;
@@ -23,6 +27,7 @@ public class EmployeeController {
 
 	@RequestMapping(value = "/employee", method = RequestMethod.GET)
 	public String listPersons(Model model) {
+		logger.info("inside listPersons");
 		model.addAttribute("employee", new EmployeeDTO());
 		model.addAttribute("listEmployee", this.employeeService.listEmployee());
 		return "employee";
@@ -31,6 +36,7 @@ public class EmployeeController {
 	// For add and update person both
 	@RequestMapping(value = "/employee/add", method = RequestMethod.POST)
 	public String addPerson(@ModelAttribute("employee") EmployeeDTO employee) {
+		logger.info("inside addPerson");
 		if (employee.getId() == null) {
 			this.employeeService.addEmployee(employee);
 		} else {
@@ -41,12 +47,14 @@ public class EmployeeController {
 
 	@RequestMapping("/remove/{id}")
 	public String removePerson(@PathVariable("id") int id) {
+		logger.info("inside removePerson");
 		this.employeeService.removeEmployee(id);
 		return "redirect:/employee";
 	}
 
 	@RequestMapping("/edit/{id}")
 	public String editPerson(@PathVariable("id") int id, Model model) {
+		logger.info("inside editPerson");
 		model.addAttribute("employee", this.employeeService.getEmployeeById(id));
 		model.addAttribute("listEmployee", this.employeeService.listEmployee());
 		return "employee";
